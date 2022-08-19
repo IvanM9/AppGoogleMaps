@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback,GoogleMap.OnMapClic
  OnMarkerClickListener {
     lateinit var mMap:GoogleMap
     //Variable para almacenar los puntos del evento click
-    var puntos: ArrayList<LatLng> = ArrayList<LatLng>()
+    var coordenadas: ArrayList<LatLng> = ArrayList<LatLng>()
 
     lateinit var marker:Marker
 
@@ -60,22 +60,22 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback,GoogleMap.OnMapClic
         Toast.LENGTH_SHORT).show();
 
         //Agregar un marcador
-        mMap.addMarker(MarkerOptions().position(point).title("Lugar " + puntos.size));
+        mMap.addMarker(MarkerOptions().position(point).title("Lugar " + coordenadas.size));
 
         mMap.setOnMarkerClickListener(this)
 
 
         //Para capturar los puntos y hacer un cuadro que encierre aquello
-        puntos.add(point)
-        if(puntos.size==4){
+        coordenadas.add(point)
+        if(coordenadas.size==4){
             var lineas:PolylineOptions = PolylineOptions()
-            for(punto:LatLng in puntos)
-                lineas.add(punto)
-            lineas.add(puntos.get(0))
+            for(elements in coordenadas)
+                lineas.add(elements)
+            lineas.add(coordenadas.get(0))
             lineas.width(8F);
             lineas.color(Color.RED);
             mMap.addPolyline(lineas);
-            puntos.clear()
+            coordenadas.clear()
         }
     }
 
